@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padaria Dona Lene — Cardápio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --bg-warm: #fff8f7;
+      --bg-warm-alt: #fdf1ef;
+      --text-primary: #1f1a1a;
+      --text-secondary: #5c5252;
+      --red-primary: #c82333;
+      --red-hover: #a71d2a;
+      --red-soft: rgba(200, 35, 51, 0.08);
+      --border-light: #efe2e0;
+      --border-red: rgba(200, 35, 51, 0.25);
+      --shadow-sm: 0 4px 14px rgba(31, 26, 26, 0.05);
+      --shadow-md: 0 12px 28px rgba(31, 26, 26, 0.12);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --container-max: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-white);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-title {
+      font-family: 'Fraunces', Georgia, serif;
+      margin: 0;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--red-primary);
+      color: #ffffff;
+      border: 1px solid var(--red-primary);
+      box-shadow: 0 4px 12px rgba(200, 35, 51, 0.22);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--red-hover);
+      transform: translateY(-1px);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--red-primary);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .brand-title { font-size: 1.25rem; font-weight: 800; }
+
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--red-primary); background-color: var(--bg-warm); }
+    .nav-links a.active { color: var(--red-primary); background-color: var(--red-soft); font-weight: 700; }
+
+    .page-header {
+      background-color: var(--bg-warm);
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border-light);
+      text-align: center;
+    }
+
+    .page-header h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); margin-bottom: 10px; }
+    .page-header p { color: var(--text-secondary); max-width: 580px; margin: 0 auto; }
+
+    .menu-section { padding: 48px 0 72px; }
+
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border-light);
+      background-color: var(--bg-warm);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active {
+      background-color: var(--red-primary);
+      border-color: var(--red-primary);
+      color: #ffffff;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .food-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .food-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-red);
+    }
+
+    .food-card:active, .food-card.clicked {
+      transform: scale(0.96);
+    }
+
+    .food-card.hidden { display: none; }
+
+    .food-img-wrap {
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+      background-color: var(--bg-warm-alt);
+      position: relative;
+    }
+
+    .food-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .food-card:hover .food-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .food-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: rgba(255, 255, 255, 0.94);
+      color: var(--red-primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .food-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .food-body h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .food-body p { font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 16px; }
+
+    .tap-hint {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(31, 26, 26, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-md);
+      max-width: 480px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      transform: translateY(24px) scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+      position: relative;
+    }
+
+    .modal-backdrop.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-content { padding: 24px; }
+    .modal-content h3 { font-size: 1.45rem; margin-bottom: 12px; }
+
+    .modal-subtitle {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--red-primary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .modal-list {
+      margin: 0 0 24px 0;
+      padding-left: 20px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .modal-list li { margin-bottom: 6px; }
+    .modal-content .btn { width: 100%; }
+
+    footer {
+      background-color: #1f1a1a;
+      color: #fff8f7;
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-brand { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .footer-text { color: #dfd3d2; font-size: 0.95rem; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.92rem; color: #dfd3d2; }
+
+    @media (min-width: 640px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 960px) {
+      .menu-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { width: 100%; justify-content: space-between; border-top: 1px solid var(--border-light); padding-top: 10px; }
+      .nav-links a { flex: 1; text-align: center; padding: 8px 6px; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">DL</span>
+        <span class="brand-title">Padaria Dona Lene</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="cardapio.html" class="active">Cardápio</a>
+        <a href="contato.html">Local e Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Nosso Cardápio</h1>
+      <p>Toque em qualquer opção abaixo para ver os detalhes do que acompanha o pedido e encomendar na hora.</p>
+    </div>
+  </section>
+
+  <main class="menu-section">
+    <div class="container">
+
+      <div class="filter-bar">
+        <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
+        <button type="button" class="filter-btn" data-filter="salgados">Salgados</button>
+        <button type="button" class="filter-btn" data-filter="cafes">Cafés da Manhã</button>
+      </div>
+
+      <div class="menu-grid">
+
+        <article class="food-card" data-category="salgados"
+          data-title="Coxinha de Frango com Catupiry"
+          data-img="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80"
+          data-items="Massa artesanal dourada e crocante|Recheio generoso de frango desfiado temperado|Catupiry cremoso original|Acompanha sachês de molho de pimenta e ketchup">
+          <div class="food-img-wrap">
+            <span class="food-badge">Salgados</span>
+            <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80" alt="Coxinha dourada">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Coxinha de Frango com Catupiry</h3>
+              <p>Crocante por fora e super cremosa por dentro, frita na hora.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+
+        <article class="food-card" data-category="salgados"
+          data-title="Esfiha Aberta e Fechada de Carne"
+          data-img="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
+          data-items="Massa fofinha assada no forno|Carne moída selecionada com tomate e cebola|Toque especial de limão e hortelã|Opções: unidade avulsa ou combo com 5">
+          <div class="food-img-wrap">
+            <span class="food-badge">Salgados</span>
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Esfiha assada">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Esfiha de Carne</h3>
+              <p>Massa leve assada no ponto certo com recheio bem temperado.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+        <article class="food-card" data-category="salgados"
+          data-title="Croissant Folhado Presunto e Queijo"
+          data-img="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80"
+          data-items="Massa folhada amanteigada artesanal|Fatias de presunto magro e queijo muçarela|Finalizado com orégano e gergelim|Servido quentinho na hora">
+          <div class="food-img-wrap">
+            <span class="food-badge">Salgados</span>
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80" alt="Croissant folhado">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Croissant Presunto e Queijo</h3>
+              <p>Massa folhada leve que desmancha na boca com queijo derretido.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+
+        <article class="food-card" data-category="cafes"
+          data-title="Café da Manhã Tradicional"
+          data-img="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80"
+          data-items="1 Pão francês na chapa com manteiga|1 Copo de café coado fresquinho (ou café com leite)|2 Fatias de queijo prato e 2 de presunto|1 Fatia de bolo caseiro do dia">
+          <div class="food-img-wrap">
+            <span class="food-badge">Cafés da Manhã</span>
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Café da manhã tradicional">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Café da Manhã Tradicional</h3>
+              <p>O clássico pão na chapa com café coado na hora e frios.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+
+        <article class="food-card" data-category="cafes"
+          data-title="Combo Família / Casal"
+          data-img="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=800&q=80"
+          data-items="4 Pães franceses quentinhos + 2 Croissants|Porção generosa de queijo prato, presunto e peito de peru|2 Sucos naturais de laranja (300ml cada)|Garrafa térmica de café passado ou achocolatado">
+          <div class="food-img-wrap">
+            <span class="food-badge">Cafés da Manhã</span>
+            <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" alt="Combo café da manhã">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Combo Família / Casal</h3>
+              <p>Cesta completa com pães variados, frios, suco natural e café.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+
+        <article class="food-card" data-category="cafes"
+          data-title="Pão de Queijo + Café Expresso"
+          data-img="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+          data-items="Porção com 6 pães de queijo mineiros assados na hora|1 Café expresso curto ou longo|Opção de adicionar requeijão cremoso à parte">
+          <div class="food-img-wrap">
+            <span class="food-badge">Cafés da Manhã</span>
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Pães assados">
+          </div>
+          <div class="food-body">
+            <div>
+              <h3>Pão de Queijo + Café Expresso</h3>
+              <p>Porção de pães de queijo quentinhos acompanhados de expresso.</p>
+            </div>
+            <span class="tap-hint">Ver detalhes do pedido &rarr;</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="foodModal" aria-hidden="true">
+    <div class="modal-box">
+      <button type="button" class="modal-close" id="closeModal" aria-label="Fechar">&times;</button>
+      <img src="" alt="" class="modal-img" id="modalImg">
+      <div class="modal-content">
+        <h3 id="modalTitle">Nome do Prato</h3>
+        <span class="modal-subtitle">O que vem neste pedido:</span>
+        <ul class="modal-list" id="modalList"></ul>
+        <a href="#" id="modalWhatsappBtn" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          Pedir este item no WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Padaria Dona Lene</div>
+        <p class="footer-text">Rua das Acácias, nº 412 — Vila Nova • Terça a domingo, das 6h às 20h.</p>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Início</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="contato.html">Local e Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const foodCards = document.querySelectorAll('.food-card');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        filterButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        foodCards.forEach((card) => {
+          if (filter === 'todos' || card.getAttribute('data-category') === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    const modal = document.getElementById('foodModal');
+    const closeModal = document.getElementById('closeModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalList = document.getElementById('modalList');
+    const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
+
+    foodCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        card.classList.add('clicked');
+        setTimeout(() => card.classList.remove('clicked'), 180);
+
+        const title = card.getAttribute('data-title');
+        const img = card.getAttribute('data-img');
+        const items = card.getAttribute('data-items').split('|');
+
+        modalTitle.textContent = title;
+        modalImg.src = img;
+        modalImg.alt = title;
+
+        modalList.innerHTML = '';
+        items.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          modalList.appendChild(li);
+        });
+
+        const msg = encodeURIComponent(`Olá! Vim pelo cardápio do site da Padaria Dona Lene e quero pedir: ${title}.`);
+        modalWhatsappBtn.href = `https://wa.me/5511990058633?text=${msg}`;
+
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  </script>
+
+</body>
+</html>

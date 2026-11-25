@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padaria Dona Lene — Local e Contato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --bg-warm: #fff8f7;
+      --bg-warm-alt: #fdf1ef;
+      --text-primary: #1f1a1a;
+      --text-secondary: #5c5252;
+      --red-primary: #c82333;
+      --red-hover: #a71d2a;
+      --red-soft: rgba(200, 35, 51, 0.08);
+      --border-light: #efe2e0;
+      --border-red: rgba(200, 35, 51, 0.25);
+      --shadow-sm: 0 4px 14px rgba(31, 26, 26, 0.05);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --container-max: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-white);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-title {
+      font-family: 'Fraunces', Georgia, serif;
+      margin: 0;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font-family: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--red-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(200, 35, 51, 0.22);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--red-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Cabeçalho */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+
+    .brand-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--red-primary);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .brand-title { font-size: 1.25rem; font-weight: 800; }
+
+    .nav-links { display: flex; align-items: center; gap: 8px; }
+
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--red-primary); background-color: var(--bg-warm); }
+    .nav-links a.active { color: var(--red-primary); background-color: var(--red-soft); font-weight: 700; }
+
+    /* Topo */
+    .page-header {
+      background-color: var(--bg-warm);
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border-light);
+      text-align: center;
+    }
+
+    .page-header h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); margin-bottom: 10px; }
+    .page-header p { color: var(--text-secondary); max-width: 580px; margin: 0 auto; }
+
+    /* Conteúdo */
+    .contact-section { padding: 48px 0 72px; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .info-card, .form-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-card {
+      background-color: var(--bg-warm);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-block h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .info-block p { color: var(--text-secondary); font-size: 0.95rem; }
+
+    .form-card h2 { font-size: 1.4rem; margin-bottom: 6px; }
+    .form-card .subtitle { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; display: block; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-light);
+      background-color: var(--bg-white);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--red-primary);
+    }
+
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .form-card .btn { width: 100%; }
+
+    /* Rodapé */
+    footer {
+      background-color: #1f1a1a;
+      color: #fff8f7;
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-brand { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .footer-text { color: #dfd3d2; font-size: 0.95rem; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.92rem; color: #dfd3d2; }
+
+    @media (min-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr 1.25fr; align-items: start; }
+    }
+
+    @media (min-width: 960px) {
+      .footer-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { width: 100%; justify-content: space-between; border-top: 1px solid var(--border-light); padding-top: 10px; }
+      .nav-links a { flex: 1; text-align: center; padding: 8px 6px; font-size: 0.88rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">DL</span>
+        <span class="brand-title">Padaria Dona Lene</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">Início</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="contato.html" class="active">Local e Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Localização e Contato</h1>
+      <p>Visite a padaria no bairro ou mande sua encomenda direto pelo WhatsApp.</p>
+    </div>
+  </section>
+
+  <main class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="info-card">
+          <div class="info-block">
+            <h3>Endereço</h3>
+            <p>Rua das Acácias, nº 412 — Vila Nova</p>
+          </div>
+          <div class="info-block">
+            <h3>Horário de Funcionamento</h3>
+            <p>Terça a domingo, das 6h às 20h<br>(Segunda-feira: fechado para organização e preparo)</p>
+          </div>
+          <div class="info-block">
+            <h3>Encomendas e Atendimento</h3>
+            <p>WhatsApp: (11) 99005-8633<br>Retirada no balcão ou entrega na região.</p>
+          </div>
+          <a href="https://wa.me/5511990058633?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Padaria%20Dona%20Lene." class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+            Chamar no WhatsApp
+          </a>
+        </div>
+
+        <form class="form-card" id="orderForm">
+          <h2>Monte sua Mensagem</h2>
+          <span class="subtitle">Preencha os campos abaixo e enviamos tudo pronto para o WhatsApp.</span>
+
+          <div class="form-group">
+            <label for="customerName">Seu nome</label>
+            <input type="text" id="customerName" placeholder="Ex: João" required>
+          </div>
+
+          <div class="form-group">
+            <label for="orderType">Assunto</label>
+            <select id="orderType">
+              <option value="Encomenda / Pedido">Encomenda / Pedido</option>
+              <option value="Café da Manhã / Combo">Café da Manhã / Combo</option>
+              <option value="Salgados para Festa">Salgados para Festa</option>
+              <option value="Dúvida ou Horário">Dúvida ou Horário</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="orderDetails">O que você deseja pedir ou perguntar?</label>
+            <textarea id="orderDetails" placeholder="Ex: Quero encomendar 2 combos de café da manhã para amanhã às 8h." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Enviar pedido pelo WhatsApp</button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">Padaria Dona Lene</div>
+        <p class="footer-text">Rua das Acácias, nº 412 — Vila Nova • Terça a domingo, das 6h às 20h.</p>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Início</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="contato.html">Local e Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const orderForm = document.getElementById('orderForm');
+
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const type = document.getElementById('orderType').value;
+      const details = document.getElementById('orderDetails').value.trim();
+
+      const text = encodeURIComponent(
+        `Olá! Meu nome é ${name}. Vim pelo site da Padaria Dona Lene.\nAssunto: ${type}\nDetalhes: ${details}`
+      );
+
+      window.open(`https://wa.me/5511990058633?text=${text}`, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+
+</body>
+</html>
